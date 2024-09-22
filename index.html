@@ -101,6 +101,46 @@
       margin-bottom: 10px;
     }
 
+    .shine {
+      display: inline-block;
+      position: relative;
+      color: #000;
+      animation: pulse 1s infinite;
+    }
+
+    .shine::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -75%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(120deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 100%);
+      animation: shine 2s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.1);
+      }
+    }
+
+    @keyframes shine {
+      0% {
+        left: -75%;
+      }
+
+      100% {
+        left: 125%;
+      }
+    }
+
     @media (max-width: 768px) {
       .container {
         grid-template-columns: 1fr;
@@ -152,21 +192,29 @@
       </a>
     </div>
     <div class="exhibitions">
-      <h2>ONGOING & UPCOMING:</h2>
-      - <a href="https://www.instagram.com/19grams.coffee/">@19grams.coffee</a>, Berlin<br>
+      <h2>CURRENT:</h2>
+      ✶ <a href="https://www.instagram.com/atelier_rafale">Atelier Rafale</a>, Marseille<br>
+      01 Oct 2024 - 10 Oct 2024<br>
+      <a href="./PLAYGROUND.pdf" target="_self" class="shine">PLAYGROUND</a><br><br>
+
+      ✶ <a href="https://www.instagram.com/19grams.coffee/">19grams Boxi</a>, Berlin<br>
       30 Aug 2024 - 03 Mar 2025<br><br>
-      - <a href="https://www.instagram.com/atelier_rafale">@atelier_rafale</a>, Marseille<br>
-      01 Oct 2024 - 10 Oct 2024<br><br>
 
       <h2>PAST:</h2>
-      - FAAR 24', Hôtel de Ville, Metz<br>
+      ✶ Le Petit Balcon Bar, Paris<br>
+      June - Sept 2024 | Solo exhibition<br>
+      <a href="https://www.instagram.com/p/C89pm--oTY8/">Ultramarine Society</a><br><br>
+
+      ✶ <a href="https://fr.ulule.com/users/faar/#/">FAAR 24'</a>, Hôtel de Ville, Metz<br>
       Jan 2024 | Group exhibition<br><br>
-      - Ein Raum für sich, Fondation StadtKultur<br>
+      ✶ Ein Raum für sich, Stiftung StadtKultur & Howoge<br>
       Jul-Aug 2023 | Residency, group exhibition<br>
-      Publication: 'Zusammen Zimmern'<br><br>
-      - Maison de la Lanterne, Combourg<br>
+      '<a href="https://www.stiftung-stadtkultur.de/zusammenzimmern-publikation">Zusammen
+        Zimmern</a>'<br><br>
+      ✶ Maison de la Lanterne, Combourg<br>
       2018 | Group exhibition<br>
       With Sabine Lerouxel, France Lions, Joann Webber, Feleann<br><br>
+
     </div>
   </div>
 </body>
