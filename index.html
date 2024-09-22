@@ -6,19 +6,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ambre</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap" rel="stylesheet">
   <style>
     body,
     html {
       margin: 0;
       padding: 0;
       height: 100%;
-      font-family: 'Courier New', monospace;
+      font-family: 'Rubik Mono One', sans-serif;
+      text-transform: uppercase;
       background-color: #f0f0f0;
     }
 
     .container {
       display: grid;
-      grid-template-columns: 1fr 2fr 1fr;
+      grid-template-columns: 1fr 2fr 2fr;
       grid-template-rows: auto 1fr auto;
       height: 100vh;
       gap: 10px;
@@ -52,14 +54,46 @@
     .contact {
       grid-column: 1;
       grid-row: 3;
-      font-size: 0.8em;
+      font-size: 0.6em;
+      line-height: 1.5;
     }
 
     .exhibitions {
       grid-column: 3;
       grid-row: 1 / 3;
       overflow-y: auto;
-      font-size: 0.8em;
+      font-size: 0.7em;
+      line-height: 1.4;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 10px 15px;
+      align-items: baseline;
+      color: rgb(132, 133, 133)
+    }
+
+    .exhibitions h2 {
+      grid-column: 1 / -1;
+      font-size: 1em;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #333;
+      padding-bottom: 5px;
+    }
+
+    .exhibitions .date {
+      text-align: right;
+      font-weight: 300;
+    }
+
+    .exhibitions .details {
+      text-align: left;
+      font-weight: 400;
+    }
+
+    .exhibitions a {
+      color: #5f5f5f;
+      text-decoration: none;
+      border-bottom: 1px solid #333;
     }
 
     .subtle-color {
@@ -89,16 +123,10 @@
       position: absolute;
       top: 20px;
       left: calc(20% - 150px);
-      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-      font-size: 72px;
+      font-size: 5vw;
       z-index: 10;
-      letter-spacing: 5px;
-    }
-
-    .exhibitions h2 {
-      font-size: 1em;
-      margin-top: 20px;
-      margin-bottom: 10px;
+      letter-spacing: 0.2em;
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     }
 
     .shine {
@@ -106,6 +134,7 @@
       position: relative;
       color: #000;
       animation: pulse 1s infinite;
+      overflow: hidden;
     }
 
     .shine::before {
@@ -163,7 +192,7 @@
       }
 
       .floating-title {
-        font-size: 48px;
+        font-size: 8vw;
         left: 20px;
       }
     }
@@ -193,28 +222,40 @@
     </div>
     <div class="exhibitions">
       <h2>CURRENT:</h2>
-      ✶ <a href="https://www.instagram.com/atelier_rafale">Atelier Rafale</a>, Marseille<br>
-      01 Oct 2024 - 10 Oct 2024<br>
-      <a href="./PLAYGROUND.pdf" target="_self" class="shine">PLAYGROUND</a><br><br>
-
-      ✶ <a href="https://www.instagram.com/19grams.coffee/">19grams Boxi</a>, Berlin<br>
-      30 Aug 2024 - 03 Mar 2025<br><br>
+      <div class="date">01 OCT 2024 - 10 OCT 2024</div>
+      <div class="details">
+        <a href="https://www.instagram.com/atelier_rafale">ATELIER RAFALE</a>, MARSEILLE
+        <br>
+        <a href="./PLAYGROUND.pdf" target="_self" class="shine">PLAYGROUND</a>
+      </div>
+      <div class="date">30 AUG 2024 - 03 MAR 2025</div>
+      <div class="details">
+        <a href="https://www.instagram.com/19grams.coffee/">19GRAMS BOXI</a>, BERLIN
+      </div>
 
       <h2>PAST:</h2>
-      ✶ Le Petit Balcon Bar, Paris<br>
-      June - Sept 2024 | Solo exhibition<br>
-      <a href="https://www.instagram.com/p/C89pm--oTY8/">Ultramarine Society</a><br><br>
-
-      ✶ <a href="https://fr.ulule.com/users/faar/#/">FAAR 24'</a>, Hôtel de Ville, Metz<br>
-      Jan 2024 | Group exhibition<br><br>
-      ✶ Ein Raum für sich, Stiftung StadtKultur & Howoge<br>
-      Jul-Aug 2023 | Residency, group exhibition<br>
-      '<a href="https://www.stiftung-stadtkultur.de/zusammenzimmern-publikation">Zusammen
-        Zimmern</a>'<br><br>
-      ✶ Maison de la Lanterne, Combourg<br>
-      2018 | Group exhibition<br>
-      With Sabine Lerouxel, France Lions, Joann Webber, Feleann<br><br>
-
+      <div class="date">JUNE - SEPT 2024</div>
+      <div class="details">
+        LE PETIT BALCON BAR, PARIS | SOLO EXHIBITION
+        <br>
+        <a href="https://www.instagram.com/p/C89pm--oTY8/">ULTRAMARINE SOCIETY</a>
+      </div>
+      <div class="date">JAN 2024</div>
+      <div class="details">
+        <a href="https://fr.ulule.com/users/faar/#/">FAAR 24'</a>, HÔTEL DE VILLE, METZ | GROUP EXHIBITION
+      </div>
+      <div class="date">JUL-AUG 2023</div>
+      <div class="details">
+        EIN RAUM FÜR SICH, STIFTUNG STADTKULTUR & HOWOGE | RESIDENCY, GROUP EXHIBITION
+        <br>
+        '<a href="https://www.stiftung-stadtkultur.de/zusammenzimmern-publikation">ZUSAMMEN ZIMMERN</a>'
+      </div>
+      <div class="date">2018</div>
+      <div class="details">
+        MAISON DE LA LANTERNE, COMBOURG | GROUP EXHIBITION
+        <br>
+        WITH SABINE LEROUXEL, FRANCE LIONS, JOANN WEBBER, FELEANN
+      </div>
     </div>
   </div>
 </body>
