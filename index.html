@@ -3,94 +3,208 @@
 
 <head>
   <title>A M B R E , T H E ! W E B S I T E</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="./style.css" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="manifest" href="site.webmanifest">
+
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-0D8G9JCVVW"></script>
   <script>
     window.dataLayer = window.dataLayer || []
     function gtag() { dataLayer.push(arguments) }
     gtag('js', new Date())
-
     gtag('config', 'G-0D8G9JCVVW');
   </script>
-  <!-- Cronitor RUM -->
+
   <script async src="https://rum.cronitor.io/script.js"></script>
   <script>
     window.cronitor = window.cronitor || function () { (window.cronitor.q = window.cronitor.q || []).push(arguments) }
     cronitor('config', { clientKey: 'b6dec4d77cebfcf1e19b9ce13f70ea76' });
   </script>
 
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ambre</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="./style.css" />
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
 
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-  <link rel="manifest" href="site.webmanifest">
+    body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    .page-container {
+      height: 100vh;
+      overflow-y: auto;
+      scroll-snap-type: y mandatory;
+    }
+
+    .main-page,
+    .catalogue-page {
+      height: 100vh;
+      width: 100vw;
+      scroll-snap-align: start;
+      position: relative;
+    }
+
+    .catalogue-page {
+      background: white;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0.7;
+      z-index: 1000;
+    }
+
+    .scroll-arrow {
+      width: 20px;
+      height: 20px;
+      border-right: 2px solid #888;
+      border-bottom: 2px solid #888;
+      transform: rotate(45deg);
+      margin: -10px;
+      animation: fadeAndBounce 2s infinite;
+    }
+
+    @keyframes fadeAndBounce {
+
+      0%,
+      100% {
+        opacity: 0.3;
+        transform: translateY(0) rotate(45deg);
+      }
+
+      50% {
+        opacity: 1;
+        transform: translateY(10px) rotate(45deg);
+      }
+    }
+
+    .catalogue-frame {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
 </head>
 
 <body>
-  <div class="container">
-    <div class="floating-title">
-      <span style="color: #cacaca;">A</span>
-      <span style="color: #5c5c5c;">M</span>
-      <span style="color: #e6e4e4;">B</span>
-      <span style="color: #d1d1d1;">R</span>
-      <span style="color: #a8a8a8;">E</span>
-    </div>
-    <div class="artwork">
-      <img src="./img1.jpg" alt="art">
-      <div class="subtle-color"></div>
-    </div>
-    <div class="contact">
-      CONTACT:<br>
-      <a class="email" href="mailto:ambre.lerouxel@gmail.com">ambre.lerouxel@gmail.com</a><br>
-      +33 7 49 05 92 37 <br>
-      <a href="https://www.instagram.com/ambrelart/" class="instagram-link" target="_blank" rel="noopener noreferrer">
-        <i class="fab fa-instagram"></i>@ambrelart
-      </a>
-    </div>
-    <div class="exhibitions">
-      <h2>CURRENT:</h2>
-      <div class="date">01 OCT 2024 - 10 OCT 2024</div>
-      <div class="details">
-        <a href="https://www.instagram.com/atelier_rafale">ATELIER RAFALE</a>, MARSEILLE
-        <br>
-        <a href="./PLAYGROUND.pdf" target="_self" class="shine">PLAYGROUND</a>
-      </div>
-      <div class="date">30 AUG 2024 - 03 MAR 2025</div>
-      <div class="details">
-        <a href="https://www.instagram.com/19grams.coffee/">19GRAMS BOXI</a>, BERLIN
-      </div>
+  <div class="page-container">
+    <div class="main-page">
+      <div class="container">
+        <div class="floating-title">
+          <span style="color: #cacaca;">A</span>
+          <span style="color: #5c5c5c;">M</span>
+          <span style="color: #e6e4e4;">B</span>
+          <span style="color: #d1d1d1;">R</span>
+          <span style="color: #a8a8a8;">E</span>
+        </div>
+        <div class="artwork">
+          <img src="./img1.jpg" alt="art">
+          <div class="subtle-color"></div>
+        </div>
+        <div class="contact">
+          CONTACT:<br>
+          <a class="email" href="mailto:ambre.lerouxel@gmail.com">ambre.lerouxel@gmail.com</a><br>
+          +33 7 49 05 92 37 <br>
+          <a href="https://www.instagram.com/ambrelart/" class="instagram-link" target="_blank"
+            rel="noopener noreferrer">
+            <i class="fab fa-instagram"></i>@ambrelart
+          </a>
+        </div>
+        <div class="exhibitions">
+          <h2>CURRENT:</h2>
+          <div class="date">01 OCT 2024 - 10 OCT 2024</div>
+          <div class="details">
+            <a href="https://www.instagram.com/atelier_rafale">ATELIER RAFALE</a>, MARSEILLE
+            <br>
+            <a href="./PLAYGROUND.pdf" target="_self" class="shine">PLAYGROUND</a>
+          </div>
+          <div class="date">30 AUG 2024 - 03 MAR 2025</div>
+          <div class="details">
+            <a href="https://www.instagram.com/19grams.coffee/">19GRAMS BOXI</a>, BERLIN
+          </div>
 
-      <h2>PAST:</h2>
-      <div class="date">JUN - SEP 2024</div>
-      <div class="details">
-        LE PETIT BALCON BAR, PARIS | SOLO EXHIBITION
-        <br>
-        <a href="https://www.instagram.com/p/C89pm--oTY8/">ULTRAMARINE SOCIETY</a>
+          <h2>PAST:</h2>
+          <div class="date">JUN - SEP 2024</div>
+          <div class="details">
+            LE PETIT BALCON BAR, PARIS | SOLO EXHIBITION
+            <br>
+            <a href="https://www.instagram.com/p/C89pm--oTY8/">ULTRAMARINE SOCIETY</a>
+          </div>
+          <div class="date">JAN 2024</div>
+          <div class="details">
+            <a href="https://fr.ulule.com/users/faar/#/">FAAR 24'</a>, HÔTEL DE VILLE, METZ | GROUP EXHIBITION
+          </div>
+          <div class="date">JUL-AUG 2023</div>
+          <div class="details">
+            EIN RAUM FÜR SICH, STIFTUNG STADTKULTUR & HOWOGE | RESIDENCY, GROUP EXHIBITION
+            <br>
+            '<a href="https://www.stiftung-stadtkultur.de/zusammenzimmern-publikation">ZUSAMMEN ZIMMERN</a>'
+          </div>
+          <div class="date">2018</div>
+          <div class="details">
+            MAISON DE LA LANTERNE, COMBOURG | GROUP EXHIBITION
+            <br>
+            WITH SABINE LEROUXEL, FRANCE LIONS, JOANN WEBBER, FELEANN
+          </div>
+        </div>
       </div>
-      <div class="date">JAN 2024</div>
-      <div class="details">
-        <a href="https://fr.ulule.com/users/faar/#/">FAAR 24'</a>, HÔTEL DE VILLE, METZ | GROUP EXHIBITION
+      <div class="scroll-indicator">
+        <div class="scroll-arrow"></div>
       </div>
-      <div class="date">JUL-AUG 2023</div>
-      <div class="details">
-        EIN RAUM FÜR SICH, STIFTUNG STADTKULTUR & HOWOGE | RESIDENCY, GROUP EXHIBITION
-        <br>
-        '<a href="https://www.stiftung-stadtkultur.de/zusammenzimmern-publikation">ZUSAMMEN ZIMMERN</a>'
-      </div>
-      <div class="date">2018</div>
-      <div class="details">
-        MAISON DE LA LANTERNE, COMBOURG | GROUP EXHIBITION
-        <br>
-        WITH SABINE LEROUXEL, FRANCE LIONS, JOANN WEBBER, FELEANN
-      </div>
+    </div>
+    <div class="catalogue-page">
+      <iframe src="catalogue/catalogue.html" class="catalogue-frame"></iframe>
     </div>
   </div>
+
+  <script>
+    let lastScrollTop = 0
+    let scrollThreshold = 50
+    let isScrolling = false
+    let scrollTimeout
+
+    const container = document.querySelector('.page-container')
+
+    container.addEventListener('scroll', (e) => {
+      clearTimeout(scrollTimeout)
+
+      const currentScroll = container.scrollTop
+      const scrollDelta = Math.abs(currentScroll - lastScrollTop)
+
+      if (!isScrolling && scrollDelta > scrollThreshold) {
+        isScrolling = true
+
+        if (currentScroll > lastScrollTop) {
+          container.scrollTo({
+            top: window.innerHeight,
+            behavior: 'smooth'
+          })
+        } else {
+          container.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          })
+        }
+      }
+
+      scrollTimeout = setTimeout(() => {
+        isScrolling = false
+        lastScrollTop = container.scrollTop
+      }, 150)
+    });
+  </script>
 </body>
 
 </html>
