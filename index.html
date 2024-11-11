@@ -53,17 +53,14 @@
       position: relative;
     }
 
-    .catalogue-page {
-      background: white;
-    }
-
     .scroll-indicator {
       position: absolute;
       bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
-      opacity: 0.7;
+      opacity: 0;
       z-index: 1000;
+      animation: arrowAppear 2s 2s forwards, arrowFlash 4s 6s infinite;
     }
 
     .scroll-arrow {
@@ -73,20 +70,116 @@
       border-bottom: 2px solid #888;
       transform: rotate(45deg);
       margin: -10px;
-      animation: fadeAndBounce 2s infinite;
     }
 
-    @keyframes fadeAndBounce {
+    .catalogue-flash {
+      position: absolute;
+      bottom: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Rubik Mono One', sans-serif;
+      font-size: 1.2rem;
+      display: flex;
+      opacity: 0;
+      animation: catalogueFlash 7s 1s infinite alternate;
+    }
+
+    /* Individual letter styles with alternating colors */
+    .catalogue-flash span {
+      display: inline-block;
+      animation: colorWave 3s infinite alternate;
+    }
+
+    /* Set animation delay for each letter to create a wave effect */
+    .catalogue-flash span:nth-child(1) {
+      animation-delay: 0s;
+    }
+
+    .catalogue-flash span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .catalogue-flash span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    .catalogue-flash span:nth-child(4) {
+      animation-delay: 0.6s;
+    }
+
+    .catalogue-flash span:nth-child(5) {
+      animation-delay: 0.8s;
+    }
+
+    .catalogue-flash span:nth-child(6) {
+      animation-delay: 1s;
+    }
+
+    .catalogue-flash span:nth-child(7) {
+      animation-delay: 1.2s;
+    }
+
+    .catalogue-flash span:nth-child(8) {
+      animation-delay: 1.4s;
+    }
+
+    .catalogue-flash span:nth-child(9) {
+      animation-delay: 1.6s;
+    }
+
+    /* Keyframes for delayed arrow appearance */
+    @keyframes arrowAppear {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 0.7;
+      }
+    }
+
+    /* Subtle flashing effect for the scroll arrow */
+    @keyframes arrowFlash {
 
       0%,
       100% {
         opacity: 0.3;
-        transform: translateY(0) rotate(45deg);
       }
 
       50% {
+        opacity: 0.9;
+      }
+    }
+
+    @keyframes catalogueFlash {
+
+      0%,
+      85% {
+        opacity: 0;
+      }
+
+      86%,
+      100% {
         opacity: 1;
-        transform: translateY(10px) rotate(45deg);
+      }
+    }
+
+    /* Keyframes for abrupt color changes, cycling through colors */
+    @keyframes colorWave {
+      0% {
+        color: #5f5f5f;
+      }
+
+      33% {
+        color: #cacaca;
+      }
+
+      66% {
+        color: #5c5c5c;
+      }
+
+      100% {
+        color: #e6e4e4;
       }
     }
 
@@ -159,6 +252,9 @@
             WITH SABINE LEROUXEL, FRANCE LIONS, JOANN WEBBER, FELEANN
           </div>
         </div>
+      </div>
+      <div class="catalogue-flash">
+        <span>C</span><span>A</span><span>T</span><span>A</span><span>L</span><span>O</span><span>G</span><span>U</span><span>E</span>
       </div>
       <div class="scroll-indicator">
         <div class="scroll-arrow"></div>
