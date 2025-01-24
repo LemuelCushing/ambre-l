@@ -1,43 +1,86 @@
-# Simple workflow for deploying static content to GitHub Pages
 name: Deploy static content to Pages
 
 on:
-  # Runs on pushes targeting the default branch
   push:
-    branches: ["main"]
-
-  # Allows you to run this workflow manually from the Actions tab
+    branches:
+      - main
+      - remove_main_page
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 jobs:
-  # Single deploy job since we're just deploying
-  deploy:
+  # ---------------------------------------------------------
+  # Job 1: Deploy main branch to the root of GitHub Pages
+  # ---------------------------------------------------------
+  deploy_main:
+    if: github.ref_name == 'main'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout main branch
         uses: actions/checkout@v4
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
           path: '.'
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  # ---------------------------------------------------------
+  # Job 2: Deploy remove_main_page branch into a subfolder
+  # ---------------------------------------------------------
+  deploy_remove_main_page:
+    if: github.ref_name == 'remove_main_page'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out remove_main_page branch
+        uses: actions/checkout@v4
+        with:
+          # This checks out the remove_main_page code into the default directory (.)
+          ref: ${{ github.ref_name }}
+
+      - name: Check out gh-pages branch
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: gh-pages
+          # We use a separate folder so we can copy remove_main_page content into it.
+
+      - name: Copy content into subfolder
+        run: |
+          mkdir -p gh-pages/remove_main_page
+          # Copy everything from your remove_main_page content to that subfolder:
+          cp -R ./* gh-pages/remove_main_page/
+          # Avoid overwriting .git directory in gh-pages
+          rm -rf gh-pages/remove_main_page/.git
+          ls -al gh-pages/remove_main_page
+
+      - name: Configure git in gh-pages folder
+        run: |
+          cd gh-pages
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+      - name: Commit and push to gh-pages
+        run: |
+          cd gh-pages
+          git add .
+          git commit -m "Deploy remove_main_page branch to /remove_main_page subfolder [skip ci]"
+          git push origin gh-pages
