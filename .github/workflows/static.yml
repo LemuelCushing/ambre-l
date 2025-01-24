@@ -63,9 +63,7 @@ jobs:
       - name: Copy content to subfolder in main
         run: |
           mkdir -p main/remove_main_page
-          cp -R ./* main/remove_main_page/
-          # Remove any .git folder we might have accidentally copied
-          rm -rf main/remove_main_page/.git
+          rsync -a --exclude='main' --exclude='.git' ./ main/remove_main_page/
           ls -al main/remove_main_page
 
       - name: Commit subfolder changes to main
