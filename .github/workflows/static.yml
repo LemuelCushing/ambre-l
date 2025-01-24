@@ -4,12 +4,11 @@ on:
   push:
     branches:
       - main
-      - remove_main_page # Add the branch you want to deploy
-
+      - remove_main_page
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -18,16 +17,18 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  # ---------------------------------------------------------
+  # Job 1: Deploy main branch to the root of GitHub Pages
+  # ---------------------------------------------------------
+  deploy_main:
+    if: github.ref_name == 'main'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout main branch
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.ref_name }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -35,9 +36,51 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload repository content, or specify a specific directory if needed
+          # Upload entire repository
           path: '.'
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  # ---------------------------------------------------------
+  # Job 2: Deploy remove_main_page branch into a subfolder
+  # ---------------------------------------------------------
+  deploy_remove_main_page:
+    if: github.ref_name == 'remove_main_page'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out remove_main_page branch
+        uses: actions/checkout@v4
+        with:
+          # This checks out the remove_main_page code into the default directory (.)
+          ref: ${{ github.ref_name }}
+
+      - name: Check out gh-pages branch
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: gh-pages
+          # We use a separate folder so we can copy remove_main_page content into it.
+
+      - name: Copy content into subfolder
+        run: |
+          mkdir -p gh-pages/remove_main_page
+          # Copy everything from your remove_main_page content to that subfolder:
+          cp -R ./* gh-pages/remove_main_page/
+          # Avoid overwriting .git directory in gh-pages
+          rm -rf gh-pages/remove_main_page/.git
+          ls -al gh-pages/remove_main_page
+
+      - name: Configure git in gh-pages folder
+        run: |
+          cd gh-pages
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+      - name: Commit and push to gh-pages
+        run: |
+          cd gh-pages
+          git add .
+          git commit -m "Deploy remove_main_page branch to /remove_main_page subfolder [skip ci]"
+          git push origin gh-pages
