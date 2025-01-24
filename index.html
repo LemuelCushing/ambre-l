@@ -151,155 +151,91 @@
       }
     }
 
-    @keyframes catalogueFlash {
 
-      0%,
-      85% {
-        opacity: 0;
-      }
-
-      86%,
-      100% {
-        opacity: 1;
-      }
+    .artwork {
+      position: relative;
+      grid-column: 2;
+      /* Keep your original grid mapping */
+      grid-row: 1 / 4;
+      /* If you want a fixed max-height, or fill fully, adjust as you wish */
+      overflow: hidden;
     }
 
-    /* Keyframes for abrupt color changes, cycling through colors */
-    @keyframes colorWave {
-      0% {
-        color: #5f5f5f;
-      }
-
-      33% {
-        color: #cacaca;
-      }
-
-      66% {
-        color: #5c5c5c;
-      }
-
-      100% {
-        color: #e6e4e4;
-      }
-    }
-
-    .catalogue-frame {
+    .artwork iframe.catalogue-iframe {
       width: 100%;
       height: 100%;
       border: none;
+      overflow: auto;
     }
   </style>
 </head>
 
 <body>
   <div class="page-container">
-    <div class="main-page">
-      <div class="container">
-        <div class="floating-title">
-          <span style="color: #cacaca;">A</span>
-          <span style="color: #5c5c5c;">M</span>
-          <span style="color: #e6e4e4;">B</span>
-          <span style="color: #d1d1d1;">R</span>
-          <span style="color: #a8a8a8;">E</span>
-        </div>
-        <div class="artwork">
-          <img src="./img1.jpg" alt="art">
-          <div class="subtle-color"></div>
-        </div>
-        <div class="contact">
-          CONTACT:<br>
-          <a class="email" href="mailto:ambre.lerouxel@gmail.com">ambre.lerouxel@gmail.com</a><br>
-          +33 7 49 05 92 37 <br>
-          <a href="https://www.instagram.com/ambrelart/" class="instagram-link" target="_blank"
-            rel="noopener noreferrer">
-            <i class="fab fa-instagram"></i>@ambrelart
-          </a>
-        </div>
-        <div class="exhibitions">
-          <h2>CURRENT:</h2>
-          <div class="date">30 AUG 2024 - 03 MAR 2025</div>
-          <div class="details">
-            <a href="https://www.instagram.com/19grams.coffee/">19GRAMS BOXI</a>, BERLIN
-          </div>
+    <!-- Left Column (iframe) -->
+    <div class="iframe-wrapper">
+      <iframe src="catalogue/catalogue.html" class="catalogue-iframe" id="catalogueIframe"></iframe>
+    </div>
 
-          <h2>PAST:</h2>
-          <div class="date">01 OCT 2024 - 10 OCT 2024</div>
-          <div class="details">
-            <a href="https://www.instagram.com/atelier_rafale">ATELIER RAFALE</a>, MARSEILLE
-            <br>
-            <a href="./PLAYGROUND.pdf" target="_self" class="shine">PLAYGROUND</a>
-          </div>
-          <div class="date">JUN - SEP 2024</div>
-          <div class="details">
-            LE PETIT BALCON BAR, PARIS | SOLO EXHIBITION
-            <br>
-            <a href="https://www.instagram.com/p/C89pm--oTY8/">ULTRAMARINE SOCIETY</a>
-          </div>
-          <div class="date">JAN 2024</div>
-          <div class="details">
-            <a href="https://fr.ulule.com/users/faar/#/">FAAR 24'</a>, HÔTEL DE VILLE, METZ | GROUP EXHIBITION
-          </div>
-          <div class="date">JUL-AUG 2023</div>
-          <div class="details">
-            EIN RAUM FÜR SICH, STIFTUNG STADTKULTUR & HOWOGE | RESIDENCY, GROUP EXHIBITION
-            <br>
-            '<a href="https://www.stiftung-stadtkultur.de/zusammenzimmern-publikation">ZUSAMMEN ZIMMERN</a>'
-          </div>
-          <div class="date">2018</div>
-          <div class="details">
-            MAISON DE LA LANTERNE, COMBOURG | GROUP EXHIBITION
-            <br>
-            WITH SABINE LEROUXEL, FRANCE LIONS, JOANN WEBBER, FELEANN
-          </div>
+    <!-- Right Column (Exhibitions) -->
+    <div class="right-column">
+      <div class="exhibitions">
+        <h2>CURRENT:</h2>
+        <div class="date">30 AUG 2024 - 03 MAR 2025</div>
+        <div class="details">
+          <a href="https://www.instagram.com/19grams.coffee/">19GRAMS BOXI</a>, BERLIN
         </div>
-      </div>
-      <div class="catalogue-flash">
-        <span>C</span><span>A</span><span>T</span><span>A</span><span>L</span><span>O</span><span>G</span><span>U</span><span>E</span>
-      </div>
-      <div class="scroll-indicator">
-        <div class="scroll-arrow"></div>
+        <h2>PAST:</h2>
+        <div class="date">01 OCT 2024 - 10 OCT 2024</div>
+        <div class="details">
+          <a href="https://www.instagram.com/atelier_rafale">ATELIER RAFALE</a>, MARSEILLE
+          <br>
+          <a href="./PLAYGROUND.pdf" target="_self" class="shine">PLAYGROUND</a>
+        </div>
+        <div class="date">JUN - SEP 2024</div>
+        <div class="details">
+          LE PETIT BALCON BAR, PARIS | SOLO EXHIBITION
+          <br>
+          <a href="https://www.instagram.com/p/C89pm--oTY8/">ULTRAMARINE SOCIETY</a>
+        </div>
+        <div class="date">JAN 2024</div>
+        <div class="details">
+          <a href="https://fr.ulule.com/users/faar/#/">FAAR 24'</a>, HÔTEL DE VILLE, METZ | GROUP EXHIBITION
+        </div>
+        <div class="date">JUL-AUG 2023</div>
+        <div class="details">
+          EIN RAUM FÜR SICH, STIFTUNG STADTKULTUR & HOWOGE | RESIDENCY, GROUP EXHIBITION
+          <br>
+          '<a href="https://www.stiftung-stadtkultur.de/zusammenzimmern-publikation">ZUSAMMEN ZIMMERN</a>'
+        </div>
+        <div class="date">2018</div>
+        <div class="details">
+          MAISON DE LA LANTERNE, COMBOURG | GROUP EXHIBITION
+          <br>
+          WITH SABINE LEROUXEL, FRANCE LIONS, JOANN WEBBER, FELEANN
+        </div>
       </div>
     </div>
-    <div class="catalogue-page">
-      <iframe src="catalogue/catalogue.html" class="catalogue-frame"></iframe>
+
+    <!-- Contact Section -->
+    <div class="contact">
+      CONTACT:<br>
+      <a href="mailto:ambre.lerouxel@gmail.com">ambre.lerouxel@gmail.com</a><br>
+      +33 7 49 05 92 37<br>
+      <a href="https://www.instagram.com/ambrelart/" class="instagram-link" target="_blank">
+        <i class="fab fa-instagram"></i>@ambrelart
+      </a>
     </div>
   </div>
 
   <script>
-    let lastScrollTop = 0
-    let scrollThreshold = 50
-    let isScrolling = false
-    let scrollTimeout
+    // Funnel all scrolling into the iframe
+    const iframe = document.getElementById("catalogueIframe")
 
-    const container = document.querySelector('.page-container')
-
-    container.addEventListener('scroll', (e) => {
-      clearTimeout(scrollTimeout)
-
-      const currentScroll = container.scrollTop
-      const scrollDelta = Math.abs(currentScroll - lastScrollTop)
-
-      if (!isScrolling && scrollDelta > scrollThreshold) {
-        isScrolling = true
-
-        if (currentScroll > lastScrollTop) {
-          container.scrollTo({
-            top: window.innerHeight,
-            behavior: 'smooth'
-          })
-        } else {
-          container.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-          })
-        }
-      }
-
-      scrollTimeout = setTimeout(() => {
-        isScrolling = false
-        lastScrollTop = container.scrollTop
-      }, 150)
-    });
+    window.addEventListener("wheel", (e) => {
+      e.preventDefault() // Prevent the body from scrolling
+      iframe.contentWindow.scrollBy(0, e.deltaY) // Pass scroll to the iframe
+    }, { passive: false });
   </script>
 </body>
 
