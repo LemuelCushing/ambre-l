@@ -7,20 +7,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="./style.css" />
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="manifest" href="site.webmanifest">
-
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0D8G9JCVVW"></script>
-  <script>
-    window.dataLayer = window.dataLayer || []
-    function gtag() { dataLayer.push(arguments) }
-    gtag('js', new Date())
-    gtag('config', 'G-0D8G9JCVVW');
-  </script>
 
   <script async src="https://rum.cronitor.io/script.js"></script>
   <script>
@@ -29,275 +19,117 @@
   </script>
 
   <style>
-    html {
-      scroll-behavior: smooth;
-    }
-
+    html,
     body {
       margin: 0;
       padding: 0;
-      overflow-x: hidden;
+      background: #fff;
+      font-family: serif;
     }
 
-    .page-container {
-      height: 100vh;
-      overflow-y: auto;
-      scroll-snap-type: y mandatory;
-    }
-
-    .main-page,
-    .catalogue-page {
-      height: 100vh;
+    .catalogue-container {
       width: 100vw;
-      scroll-snap-align: start;
-      position: relative;
-    }
-
-    .scroll-indicator {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      opacity: 0;
-      z-index: 1000;
-      animation: arrowAppear 2s 2s forwards, arrowFlash 4s 6s infinite;
-    }
-
-    .scroll-arrow {
-      width: 20px;
-      height: 20px;
-      border-right: 2px solid #888;
-      border-bottom: 2px solid #888;
-      transform: rotate(45deg);
-      margin: -10px;
-    }
-
-    .catalogue-flash {
-      position: absolute;
-      bottom: 60px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Rubik Mono One', sans-serif;
-      font-size: 1.2rem;
+      height: 100vh;
+      overflow-x: auto;
+      overflow-y: hidden;
       display: flex;
-      opacity: 0;
-      animation: catalogueFlash 7s 1s infinite alternate;
-    }
-
-    .catalogue-flash span {
-      display: inline-block;
-      animation: colorWave 3s infinite alternate;
-    }
-
-    /* Set animation delay for each letter to create a wave effect */
-    .catalogue-flash span:nth-child(1) {
-      animation-delay: 0s;
-    }
-
-    .catalogue-flash span:nth-child(2) {
-      animation-delay: 0.2s;
-    }
-
-    .catalogue-flash span:nth-child(3) {
-      animation-delay: 0.4s;
-    }
-
-    .catalogue-flash span:nth-child(4) {
-      animation-delay: 0.6s;
-    }
-
-    .catalogue-flash span:nth-child(5) {
-      animation-delay: 0.8s;
-    }
-
-    .catalogue-flash span:nth-child(6) {
-      animation-delay: 1s;
-    }
-
-    .catalogue-flash span:nth-child(7) {
-      animation-delay: 1.2s;
-    }
-
-    .catalogue-flash span:nth-child(8) {
-      animation-delay: 1.4s;
-    }
-
-    .catalogue-flash span:nth-child(9) {
-      animation-delay: 1.6s;
-    }
-
-    /* Keyframes for delayed arrow appearance */
-    @keyframes arrowAppear {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 0.7;
-      }
-    }
-
-    /* Subtle flashing effect for the scroll arrow */
-    @keyframes arrowFlash {
-
-      0%,
-      100% {
-        opacity: 0.3;
-      }
-
-      50% {
-        opacity: 0.9;
-      }
-    }
-
-    @keyframes catalogueFlash {
-
-      0%,
-      85% {
-        opacity: 0;
-      }
-
-      86%,
-      100% {
-        opacity: 1;
-      }
-    }
-
-    /* Keyframes for abrupt color changes, cycling through colors */
-    @keyframes colorWave {
-      0% {
-        color: #5f5f5f;
-      }
-
-      33% {
-        color: #cacaca;
-      }
-
-      66% {
-        color: #5c5c5c;
-      }
-
-      100% {
-        color: #e6e4e4;
-      }
+      justify-content: center;
+      align-items: flex-start;
+      background: #fff;
     }
 
     .catalogue-frame {
-      width: 100%;
-      height: 100%;
+      /* Force a width slightly larger than many screens, to keep the “scrolling effect” */
+      width: 1200px;
+      height: 100vh;
       border: none;
+      display: block;
+      margin: 0 auto;
+    }
+
+    /* A minimal floating contact toggle button */
+    .contact-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: black;
+      color: white;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+      z-index: 999;
+    }
+
+    .contact-panel {
+      display: none;
+      position: fixed;
+      right: 1rem;
+      top: 3.5rem;
+      background: #f9f9f9;
+      border: 1px solid #2b1212;
+      z-index: 1000;
+      padding: 0.75rem;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-panel.active {
+      display: block;
+    }
+
+    .contact-panel a {
+      color: #000;
+      text-decoration: none;
+    }
+
+    .contact-panel .instagram-link i {
+      margin-right: 0.25rem;
     }
   </style>
 </head>
 
 <body>
-  <div class="page-container">
-    <div class="main-page">
-      <div class="container">
-        <div class="floating-title">
-          <span style="color: #cacaca;">A</span>
-          <span style="color: #5c5c5c;">M</span>
-          <span style="color: #e6e4e4;">B</span>
-          <span style="color: #d1d1d1;">R</span>
-          <span style="color: #a8a8a8;">E</span>
-        </div>
-        <div class="artwork">
-          <img src="./img1.jpg" alt="art">
-          <div class="subtle-color"></div>
-        </div>
-        <div class="contact">
-          CONTACT:<br>
-          <a class="email" href="mailto:ambre.lerouxel@gmail.com">ambre.lerouxel@gmail.com</a><br>
-          +33 7 49 05 92 37 <br>
-          <a href="https://www.instagram.com/ambrelart/" class="instagram-link" target="_blank"
-            rel="noopener noreferrer">
-            <i class="fab fa-instagram"></i>@ambrelart
-          </a>
-        </div>
-        <div class="exhibitions">
-          <h2>CURRENT:</h2>
-          <div class="date">30 AUG 2024 - 03 MAR 2025</div>
-          <div class="details">
-            <a href="https://www.instagram.com/19grams.coffee/">19GRAMS BOXI</a>, BERLIN
-          </div>
+  <div class="catalogue-container">
+    <!-- The iframe is left untouched; update catalogue.html as you wish -->
+    <iframe src="catalogue/catalogue.html" class="catalogue-frame"></iframe>
+  </div>
 
-          <h2>PAST:</h2>
-          <div class="date">01 OCT 2024 - 10 OCT 2024</div>
-          <div class="details">
-            <a href="https://www.instagram.com/atelier_rafale">ATELIER RAFALE</a>, MARSEILLE
-            <br>
-            <a href="./PLAYGROUND.pdf" target="_self" class="shine">PLAYGROUND</a>
-          </div>
-          <div class="date">JUN - SEP 2024</div>
-          <div class="details">
-            LE PETIT BALCON BAR, PARIS | SOLO EXHIBITION
-            <br>
-            <a href="https://www.instagram.com/p/C89pm--oTY8/">ULTRAMARINE SOCIETY</a>
-          </div>
-          <div class="date">JAN 2024</div>
-          <div class="details">
-            <a href="https://fr.ulule.com/users/faar/#/">FAAR 24'</a>, HÔTEL DE VILLE, METZ | GROUP EXHIBITION
-          </div>
-          <div class="date">JUL-AUG 2023</div>
-          <div class="details">
-            EIN RAUM FÜR SICH, STIFTUNG STADTKULTUR & HOWOGE | RESIDENCY, GROUP EXHIBITION
-            <br>
-            '<a href="https://www.stiftung-stadtkultur.de/zusammenzimmern-publikation">ZUSAMMEN ZIMMERN</a>'
-          </div>
-          <div class="date">2018</div>
-          <div class="details">
-            MAISON DE LA LANTERNE, COMBOURG | GROUP EXHIBITION
-            <br>
-            WITH SABINE LEROUXEL, FRANCE LIONS, JOANN WEBBER, FELEANN
-          </div>
-        </div>
-      </div>
-      <div class="catalogue-flash">
-        <span>C</span><span>A</span><span>T</span><span>A</span><span>L</span><span>O</span><span>G</span><span>U</span><span>E</span>
-      </div>
-      <div class="scroll-indicator">
-        <div class="scroll-arrow"></div>
-      </div>
-    </div>
-    <div class="catalogue-page">
-      <iframe src="catalogue/catalogue.html" class="catalogue-frame"></iframe>
-    </div>
+  <!-- Simple floating contact toggle -->
+  <div class="contact-toggle">CONTACT</div>
+
+  <!-- Hidden contact panel that appears on click -->
+  <div class="contact-panel">
+    <strong>CONTACT:</strong><br>
+    <a class="email" href="mailto:ambre.lerouxel@gmail.com">ambre.lerouxel@gmail.com</a><br>
+    +33 7 49 05 92 37 <br>
+    <a href="https://www.instagram.com/ambrelart/" class="instagram-link" target="_blank" rel="noopener noreferrer">
+      <i class="fab fa-instagram"></i>@ambrelart
+    </a>
   </div>
 
   <script>
-    let lastScrollTop = 0
-    let scrollThreshold = 50
-    let isScrolling = false
-    let scrollTimeout
+    // Toggle the contact panel when the user clicks CONTACT
+    const toggleButton = document.querySelector('.contact-toggle')
+    const contactPanel = document.querySelector('.contact-panel')
 
-    const container = document.querySelector('.page-container')
+    toggleButton.addEventListener('click', () => {
+      contactPanel.classList.toggle('active')
+    })
 
-    container.addEventListener('scroll', (e) => {
-      clearTimeout(scrollTimeout)
+    // Funnel all scrolling into the iframe
+    const iframe = document.querySelector(".catalogue-frame")
 
-      const currentScroll = container.scrollTop
-      const scrollDelta = Math.abs(currentScroll - lastScrollTop)
+    window.addEventListener("wheel", (event) => {
+      // Forward the scroll event to the iframe
+      if (iframe && iframe.contentWindow) {
+        iframe.contentWindow.scrollBy({
+          top: event.deltaY, // Vertical scrolling
+          left: event.deltaX, // Horizontal scrolling
+          behavior: "auto", // Instant scrolling
+        })
 
-      if (!isScrolling && scrollDelta > scrollThreshold) {
-        isScrolling = true
-
-        if (currentScroll > lastScrollTop) {
-          container.scrollTo({
-            top: window.innerHeight,
-            behavior: 'smooth'
-          })
-        } else {
-          container.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-          })
-        }
+        // Prevent the default scroll behavior of the parent page
+        event.preventDefault()
       }
-
-      scrollTimeout = setTimeout(() => {
-        isScrolling = false
-        lastScrollTop = container.scrollTop
-      }, 150)
     });
   </script>
 </body>
