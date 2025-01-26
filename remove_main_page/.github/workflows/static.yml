@@ -1,0 +1,78 @@
+name: Deploy static content to Pages
+
+on:
+  push:
+    branches:
+      - main
+      - remove_main_page
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # -----------------------------------------------------
+  # JOB 1: Deploy the main branch as usual to GitHub Pages
+  # -----------------------------------------------------
+  deploy_main:
+    # Only run if we're on main AND the commit message does NOT contain "[skip ci]"
+    if: github.ref_name == 'main' && !contains(github.event.head_commit.message, '[skip ci]')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  # ------------------------------------------------------------------
+  # JOB 2: Whenever remove_main_page is pushed, copy its content into a 
+  #        subfolder /remove_main_page in main, then push back to main 
+  #        (with [skip ci] to avoid re-triggering an endless loop).
+  # ------------------------------------------------------------------
+  deploy_remove_main_page:
+    if: github.ref_name == 'remove_main_page'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout remove_main_page branch
+        uses: actions/checkout@v4
+        with:
+          ref: remove_main_page  # This code is now in .
+
+      - name: Checkout main branch into a subfolder
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: main             # We'll copy remove_main_page content here
+
+      - name: Copy content to subfolder in main
+        run: |
+          mkdir -p main/remove_main_page
+          rsync -a --exclude='main' --exclude='.git' ./ main/remove_main_page/
+          ls -al main/remove_main_page
+
+      - name: Commit subfolder changes to main
+        run: |
+          cd main
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          # Stage changes
+          git add .
+          # Commit. The [skip ci] ensures we do NOT trigger deploy_main again.
+          git commit -m "Add/remove_main_page content into subfolder [skip ci]" || echo "No changes to commit"
+          git push origin main

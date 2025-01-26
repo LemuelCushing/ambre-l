@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>A M B R E , T H E ! W E B S I T E</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap" rel="stylesheet">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="manifest" href="site.webmanifest">
+
+  <script async src="https://rum.cronitor.io/script.js"></script>
+  <script>
+    window.cronitor = window.cronitor || function () { (window.cronitor.q = window.cronitor.q || []).push(arguments) }
+    cronitor('config', { clientKey: 'b6dec4d77cebfcf1e19b9ce13f70ea76' });
+  </script>
+
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      font-family: serif;
+    }
+
+    .catalogue-container {
+      width: 100vw;
+      height: 100vh;
+      overflow-x: auto;
+      overflow-y: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      background: #fff;
+    }
+
+    .catalogue-frame {
+      /* Force a width slightly larger than many screens, to keep the “scrolling effect” */
+      width: 1200px;
+      height: 100vh;
+      border: none;
+      display: block;
+      margin: 0 auto;
+    }
+
+    /* A minimal floating contact toggle button */
+    .contact-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: black;
+      color: white;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+      z-index: 999;
+    }
+
+    .contact-panel {
+      display: none;
+      position: fixed;
+      right: 1rem;
+      top: 3.5rem;
+      background: #f9f9f9;
+      border: 1px solid #2b1212;
+      z-index: 1000;
+      padding: 0.75rem;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-panel.active {
+      display: block;
+    }
+
+    .contact-panel a {
+      color: #000;
+      text-decoration: none;
+    }
+
+    .contact-panel .instagram-link i {
+      margin-right: 0.25rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="catalogue-container">
+    <!-- The iframe is left untouched; update catalogue.html as you wish -->
+    <iframe src="catalogue/catalogue.html" class="catalogue-frame"></iframe>
+  </div>
+
+  <!-- Simple floating contact toggle -->
+  <div class="contact-toggle">CONTACT</div>
+
+  <!-- Hidden contact panel that appears on click -->
+  <div class="contact-panel">
+    <strong>CONTACT:</strong><br>
+    <a class="email" href="mailto:ambre.lerouxel@gmail.com">ambre.lerouxel@gmail.com</a><br>
+    +33 7 49 05 92 37 <br>
+    <a href="https://www.instagram.com/ambrelart/" class="instagram-link" target="_blank" rel="noopener noreferrer">
+      <i class="fab fa-instagram"></i>@ambrelart
+    </a>
+  </div>
+
+  <script>
+    // Toggle the contact panel when the user clicks CONTACT
+    const toggleButton = document.querySelector('.contact-toggle')
+    const contactPanel = document.querySelector('.contact-panel')
+
+    toggleButton.addEventListener('click', () => {
+      contactPanel.classList.toggle('active')
+    })
+
+    // Funnel all scrolling into the iframe
+    const iframe = document.querySelector(".catalogue-frame")
+
+    window.addEventListener("wheel", (event) => {
+      // Forward the scroll event to the iframe
+      if (iframe && iframe.contentWindow) {
+        iframe.contentWindow.scrollBy({
+          top: event.deltaY, // Vertical scrolling
+          left: event.deltaX, // Horizontal scrolling
+          behavior: "auto", // Instant scrolling
+        })
+
+        // Prevent the default scroll behavior of the parent page
+        event.preventDefault()
+      }
+    });
+  </script>
+</body>
+
+</html>
